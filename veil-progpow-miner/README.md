@@ -77,14 +77,41 @@ Connecting to [progpool.pro](https://progpool.pro):
 
 After cloning this repository into `veilminer`, it can be built with commands like:
 
+### Ubuntu / OSX
+
 ```
 cd veilminer
 git submodule update --init --recursive
 mkdir build
 cd build
 cmake .. -DETHASHCUDA=ON
-make -sj8
+make -sj $(nproc)
 ```
+
+### Windows
+
+### Prerequisites:
+1. Install Visual Studios (2019) (with the additional installation package "C++ Cmake Tools for Windows)
+2. Install latest perl to C:\Perl (https://www.perl.org/get.html)
+   Follow the steps outlined and the default perl installtion should work
+
+### Building via Visual Studios Command Line:
+Open "Developer Command Prompt for VS 2019"
+1. Open StartMenu and search for "Developer Command Prompt for VS 2019"
+2. Follow these steps:
+```
+cd C:\Users\USER_NAME\PATH_TO_VEILMIER\veilminer
+mkdir build
+cd build
+cmake .. -DETHASHCUDA=ON
+devenv veilminer.sln /build
+```
+
+### Building via Visual Studios GUI (This build doesn't seem to work for some 20XX Nvidia cards)
+   1. Open Visual Studios
+   2. Open CMakeLists.txt file with File->Open->CMake
+   3. Wait for intelligence to build the cache (this can take some time)
+   4. Build the project (CTRL+SHIFT+B) or find the build command in the menu
 
 ProgPoW can be tuned using the following parameters.  The proposed settings have been tuned for a range of existing, commodity GPUs:
 
@@ -99,16 +126,18 @@ ProgPoW can be tuned using the following parameters.  The proposed settings have
 
 The value of these parameters has been tweaked between version 0.9.2 (live on the Gangnam testnet) and 0.9.3 (proposed for Ethereum adoption).  See [this medium post](https://medium.com/@ifdefelse/progpow-progress-da5bb31a651b) for details.
 
-| Parameter             | 0.9.2 | 0.9.3 |
-|-----------------------|-------|-------|
-| `PROGPOW_PERIOD`      | `50`  | `10`  |
-| `PROGPOW_LANES`       | `16`  | `16`  |
-| `PROGPOW_REGS`        | `32`  | `32`  |
-| `PROGPOW_DAG_LOADS`   | `4`   | `4`   |
-| `PROGPOW_CACHE_BYTES` | `16x1024` | `16x1024` |
-| `PROGPOW_CNT_DAG`     | `64`  | `64`  |
-| `PROGPOW_CNT_CACHE`   | `12`  | `11`  |
-| `PROGPOW_CNT_MATH`    | `20`  | `18`  |
+| Parameter             | 0.9.2 | 0.9.3 | 0.9.4 |
+|-----------------------|-------|-------|-------|
+| `PROGPOW_PERIOD`      | `50`  | `10`  | `10`  |
+| `PROGPOW_LANES`       | `16`  | `16`  | `16`  |
+| `PROGPOW_REGS`        | `32`  | `32`  | `32`  |
+| `PROGPOW_DAG_LOADS`   | `4`   | `4`   | `4`   |
+| `PROGPOW_CACHE_BYTES` | `16x1024` | `16x1024` | `16x1024` |
+| `PROGPOW_CNT_DAG`     | `64`  | `64`  | `64`  |
+| `PROGPOW_CNT_CACHE`   | `12`  | `11`  | `11`  |
+| `PROGPOW_CNT_MATH`    | `20`  | `18`  | `18`  |
+| `EPOCH_LENGTH`        | `30000` | `30000` | `5625` |
+| `CACHE_INC_PER_EPOCH` | `1 << 24` | `1 << 24` | `1 << 24 \| 1 << 23` |
 
 ## Maintainers & Authors
 
