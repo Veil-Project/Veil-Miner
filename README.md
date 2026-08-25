@@ -302,11 +302,3 @@ against `SHA256SUMS.txt`, then run it.
 - **Which cards a build supports**: CUDA builds bake in SASS for Maxwell through
   Blackwell (`sm_50` to `sm_120`) plus PTX for the newest arch, so future cards can
   still JIT. Pin a single architecture with `-DCOMPUTE=120` to build faster.
-- **Hashrate reference**, measured in the field on v1.1.3, August 2026:
-
-  | Device | Hashrate |
-  |---|---|
-  | RTX 5060 | ~24 Mh/s |
-  | RTX 3080 | ~23 Mh/s |
-  | RTX 3060 Ti | ~19 Mh/s |
-  | RTX 3060 | ~14 Mh/s |
